@@ -1,0 +1,34 @@
+//Pesquisa Binária (busca rápida)
+#include <stdio.h> // Biblioteca padrão para entrada e saída
+#define TAM 6 // Tamanho do vetor
+ 
+int main() {
+   int vetor[TAM] = {5, 10, 15, 20, 25, 30}; // Vetor já ordenado
+   int valor = 20; // Valor que queremos encontrar
+   int inicio = 0; // Posição inicial da busca
+   int fim = TAM - 1; // Posição final da busca (último índice)
+   int meio; // Variável para calcular o meio
+   int encontrado = -1; // Se encontrar, guardamos a posição; começa com -1
+ 
+   // Enquanto ainda tiver elementos para buscar
+   while (inicio <= fim) {
+       meio = (inicio + fim) / 2; // Calcula o meio do vetor
+      printf("Verificando posição %d: %d\n", meio, vetor[meio]); // Mostra a posição e valor atual
+       if (vetor[meio] == valor) { // Se achou o valor
+           encontrado = meio; // Guarda a posição
+          printf("Valor %d encontrado na posição %d.\n", valor, meio);
+           break; // Para o laço (não precisa mais buscar)
+       } else if (vetor[meio] < valor) { // Se o valor no meio é menor
+           inicio = meio + 1; // Continua buscando na metade direita
+       } else { // Se o valor no meio é maior
+           fim = meio - 1; // Continua buscando na metade esquerda
+       }
+   }
+ 
+   // Depois da busca
+   if (encontrado == -1) { // Se não encontrou
+      printf("Valor %d não encontrado no vetor.\n", valor);
+   }
+ 
+   return 0; // Finaliza o programa
+}

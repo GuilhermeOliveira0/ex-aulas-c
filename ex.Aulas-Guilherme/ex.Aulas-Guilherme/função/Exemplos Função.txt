@@ -1,0 +1,139 @@
+--1
+#include <stdio.h>
+ 
+//Define uma função chamada mensagem
+//Não recebe nenhum parâmetro
+//Não retorna nada(void)
+void mensagem(){
+    //imprime uma mensagem na tela
+    printf("Bem-vindo ao estudo de funções em C!\n");
+}
+ 
+ 
+int main()
+{
+    mensagem();
+    return 0;//finaliza corretamente o programa
+}   
+
+
+--2
+
+#include <stdio.h>
+//Define uma funcao chamada somar
+//Recebe dois inteiros como parâmetros:a e b
+//Retorna um inteiro (a soma)
+int somar(int a, int b){
+    return a + b;//retorna a soma
+}
+ 
+ 
+int main()
+{
+   int x = 10, y = 5; //declara duas variaveis
+   int resultado;
+   //chama a funcao somar passando x e y
+   resultado = somar(x, y);
+   //imprime o resultado da soma
+   printf("Resultado da soma: %d\n", resultado);
+   return 0;
+}   
+    
+--3
+#include <stdio.h>
+
+//funcao que calcula o fatorial usando repetição
+int fatorial(int n){
+    int resultado = 1; //inicializa com um 1(neutro da mutiplica~repetição
+    // for é para 
+    for(int i =1; i <= n; i++) {
+        resultado *= i;// multiplicação resultado por i em cada passo
+        
+    }
+    return resultado; // retorna o valor
+    
+}
+int main(){
+    int numero = 5;
+    //chama funçõa fatorial com número 5
+    printf("fatorial de %d é %d\n",numero,fatorial(numero));
+    
+    return 0;
+}
+--4 
+#include <stdio.h>
+
+//funcao recursiva para calcular fatorial
+int fatorial(int n){
+    //caso base: se n for 0 ou 1, o fatorial é 1 
+    //  || quer dizer ou
+    if(n ==0 || n==1){
+        return 1;
+        
+    }
+    return n* fatorial(n -1);
+}
+int main(){
+    int numero = 6;
+    
+    // chama a função recursiva
+    printf("fatorial de %d é %d\n",numero,fatorial(numero));
+}
+--5
+#include <stdio.h>
+
+// Função que realiza a soma de dois números
+int soma(int a, int b) {
+    int s = a + b;  // Soma os dois números
+    return s;       // Retorna o resultado da soma
+}
+
+// Função que realiza a subtração de dois números
+int sub(int a, int b) {
+    int s = a - b;  // Subtrai o segundo número do primeiro
+    return s;       // Retorna o resultado da subtração
+}
+
+int main() {
+    int n1, n2, op, res;  // Declaração das variáveis para os números, operação e resultado
+    int fim = 0;           // Variável que controla a execução do laço (0 para continuar, 1 para parar)
+
+    // Laço de repetição que permite continuar fazendo operações até o usuário decidir parar
+    while(fim == 0) {  
+        // Solicita ao usuário que digite o primeiro valor
+        printf("\nDigite um valor: ");
+        scanf("%d", &n1);
+
+        // Solicita ao usuário que digite o segundo valor
+        printf("Digite um valor: ");
+        scanf("%d", &n2);
+
+        // Exibe as opções de operação para o usuário escolher
+        printf("\nEscolha a operação:\n1 - Adição\n2 - Subtração\n");
+        scanf("%d", &op);  // Lê a escolha do usuário para a operação
+
+        // Verifica qual operação foi escolhida
+        if (op == 1) {
+            // Se a opção for 1 (adição), chama a função soma
+            res = soma(n1, n2);
+        }
+        if (op == 2) {
+            // Se a opção for 2 (subtração), chama a função sub
+            res = sub(n1, n2);
+        }
+
+        // Exibe o resultado da operação escolhida
+        printf("O resultado é: %d", res);
+
+        // Pergunta ao usuário se ele deseja continuar ou parar
+        printf("\n0 - Continuar\n1 - Parar\n");
+        scanf("%d", &fim);  // Lê a escolha do usuário para continuar ou parar
+
+    }
+
+    return 0;  // Finaliza o programa
+}
+
+
+
+

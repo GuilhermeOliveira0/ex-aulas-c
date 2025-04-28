@@ -1,0 +1,446 @@
+		Lista de Exercícios - Funções e Vetores em C
+
+1. Função que imprime uma mensagem
+Enunciado:
+Escreva uma função chamada mensagem() que apenas imprime 'Olá, mundo das funções!' e chame essa função a partir da main().
+
+#include <stdio.h>
+
+// Função que imprime uma mensagem na tela
+void mensagem() {
+    printf("Olá, mundo das funções!\n");
+}
+
+int main() {
+    mensagem(); // Chamando a função para exibir a mensagem
+    return 0;
+}
+
+
+
+2. Função que retorna o dobro de um número
+Enunciado:
+Crie uma função dobro(int x) que recebe um número inteiro como parâmetro e retorna o seu dobro. Use a função na main() e mostre o resultado.
+
+
+
+#include <stdio.h>
+
+// Função que recebe um número inteiro e retorna seu dobro
+int dobro(int x) {
+    return x * 2;
+}
+
+int main() {
+    int num;
+    printf("Digite um número: ");
+    scanf("%d", &num); // Lendo um número do usuário
+
+    printf("O dobro de %d é %d\n", num, dobro(num)); // Exibindo o dobro do número
+    return 0;
+}
+
+
+
+
+
+
+3. Função que soma dois números
+Enunciado:
+Faça uma função soma(int a, int b) que retorna a soma de dois números inteiros. Solicite os dois números na main() e exiba o resultado da função.
+
+#include <stdio.h>
+
+// Função que recebe dois inteiros e retorna sua soma
+int soma(int a, int b) {
+    return a + b;
+}
+
+int main() {
+    int num1, num2;
+    
+    printf("Digite dois números: ");
+    scanf("%d %d", &num1, &num2); // Lendo dois números do usuário
+
+    printf("A soma de %d e %d é %d\n", num1, num2, soma(num1, num2));
+    return 0;
+}
+
+
+
+
+4. Vetor com valores atribuídos manualmente
+Enunciado:
+Declare um vetor de 5 inteiros, atribua valores manualmente e use um for para imprimir cada valor na tela.
+
+
+
+
+#include <stdio.h>
+
+int main() {
+    int vetor[5] = {10, 20, 30, 40, 50}; // Definição do vetor com valores pré-definidos
+
+    // Exibindo os valores do vetor
+    for(int i = 0; i < 5; i++) {
+        printf("Elemento %d: %d\n", i, vetor[i]);
+    }
+
+    return 0;
+}
+
+
+
+5. Ler valores do teclado e armazená-los em um vetor
+Enunciado:
+Leia 5 valores inteiros do teclado e armazene-os em um vetor. Depois, mostre os valores lidos.
+
+
+
+#include <stdio.h>
+
+int main() {
+    int vetor[5];
+
+    // Lendo os valores do usuário
+    for(int i = 0; i < 5; i++) {
+        printf("Digite o %dº valor: ", i + 1);
+        scanf("%d", &vetor[i]);
+    }
+
+    // Exibindo os valores lidos
+    printf("Valores digitados: ");
+    for(int i = 0; i < 5; i++) {
+        printf("%d ", vetor[i]);
+    }
+
+    return 0;
+}
+
+
+
+
+Nível 2 - Intermediário
+
+6. Função que imprime um vetor
+Enunciado:
+Crie uma função mostrarVetor(int v[], int tamanho) que recebe um vetor de inteiros e imprime todos os seus elementos.
+
+#include <stdio.h>
+
+// Função que recebe um vetor e imprime seus elementos
+void mostrarVetor(int v[], int tamanho) {
+    for(int i = 0; i < tamanho; i++) {
+        printf("%d ", v[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int numeros[] = {1, 2, 3, 4, 5, 6};
+
+    mostrarVetor(numeros, 6); // Chamando a função para exibir os números
+    return 0;
+}
+
+
+
+7. Função que soma os elementos de um vetor
+Enunciado:
+Faça uma função somaVetor(int v[], int tamanho) que retorna a soma de todos os elementos do vetor.
+
+#include <stdio.h>
+
+// Função que soma todos os elementos de um vetor
+int somaVetor(int v[], int tamanho) {
+    int soma = 0;
+    for(int i = 0; i < tamanho; i++) {
+        soma += v[i];
+    }
+    return soma;
+}
+
+int main() {
+    int numeros[] = {10, 20, 30, 40, 50};
+
+    printf("A soma dos elementos do vetor é %d\n", somaVetor(numeros, 5));
+    return 0;
+}
+
+
+
+8. Função que calcula a média de notas
+Enunciado:
+Crie uma função mediaNotas(float notas[], int qtd) que calcula a média de notas e retorna o valor.
+
+
+#include <stdio.h>
+
+// Função que calcula a média de um vetor de notas
+float mediaNotas(float notas[], int qtd) {
+    float soma = 0;
+    for(int i = 0; i < qtd; i++) {
+        soma += notas[i];
+    }
+    return soma / qtd;
+}
+
+int main() {
+    float notas[4];
+
+    // Lendo as notas do usuário
+    for(int i = 0; i < 4; i++) {
+        printf("Digite a %dª nota: ", i + 1);
+        scanf("%f", &notas[i]);
+    }
+
+    printf("A média das notas é %.2f\n", mediaNotas(notas, 4));
+    return 0;
+}
+
+
+
+9. Escreva uma função maiorMenor(int v[], int tamanho) que imprime o maior e o menor valor contido no vetor.
+
+#include <stdio.h>
+
+// Função que imprime o maior e o menor valor do vetor
+void maiorMenor(int v[], int tamanho) {
+    int maior = v[0], menor = v[0];
+
+    for(int i = 1; i < tamanho; i++) {
+        if(v[i] > maior) maior = v[i];
+        if(v[i] < menor) menor = v[i];
+    }
+
+    printf("Maior valor: %d\n", maior);
+    printf("Menor valor: %d\n", menor);
+}
+
+int main() {
+    int valores[] = {10, 25, 8, 42, 16};
+
+    maiorMenor(valores, 5);
+    return 0;
+}
+
+
+
+10. Faça uma função parOuImpar(int numero) que retorna 1 se for par e 0 se for ímpar. Leia 5 números do usuário e informe se são pares ou ímpares, utilizando a função.
+
+
+#include <stdio.h>
+
+// Função que retorna 1 se o número for par e 0 se for ímpar
+int parOuImpar(int numero) {
+    return (numero % 2 == 0) ? 1 : 0;
+}
+
+int main() {
+    int numeros[5];
+
+    // Lendo 5 números do usuário
+    for(int i = 0; i < 5; i++) {
+        printf("Digite o %dº número: ", i + 1);
+        scanf("%d", &numeros[i]);
+    }
+
+    // Verificando se são pares ou ímpares
+    for(int i = 0; i < 5; i++) {
+        printf("O número %d é %s\n", numeros[i], parOuImpar(numeros[i]) ? "par" : "ímpar");
+    }
+
+    return 0;
+}
+--11 11. Função buscaElemento
+Essa função busca um elemento no vetor e retorna o índice ou -1 se não encontrar.
+
+
+#include <stdio.h>
+
+int buscaElemento(int v[], int tamanho, int valor) {
+    for (int i = 0; i < tamanho; i++) {
+        if (v[i] == valor) {
+            return i; // Retorna o índice do valor encontrado
+        }
+    }
+    return -1; // Retorna -1 se não encontrar o valor
+}
+
+int main() {
+    int vetor[] = {1, 5, 3, 7, 8};
+    int tamanho = 5;
+    int valor = 3;
+
+    int resultado = buscaElemento(vetor, tamanho, valor);
+    printf("Índice do valor %d: %d\n", valor, resultado); // Exibe o índice ou -1
+    return 0;
+}
+
+
+
+--12. Função contarOcorrencias
+Essa função conta quantas vezes um valor aparece no vetor.
+
+#include <stdio.h>
+
+int contarOcorrencias(int v[], int tamanho, int valor) {
+    int contador = 0;
+    for (int i = 0; i < tamanho; i++) {
+        if (v[i] == valor) {
+            contador++; // Incrementa o contador quando o valor é encontrado
+        }
+    }
+    return contador; // Retorna a quantidade de ocorrências
+}
+
+int main() {
+    int vetor[] = {1, 5, 3, 7, 3, 8};
+    int tamanho = 6;
+    int valor = 3;
+
+    int resultado = contarOcorrencias(vetor, tamanho, valor);
+    printf("O valor %d aparece %d vezes.\n", valor, resultado);
+    return 0;
+}
+
+
+
+--13. Função ordenar
+Essa função ordena o vetor em ordem crescente usando o bubble sort.
+
+#include <stdio.h>
+
+void ordenar(int v[], int tamanho) {
+    for (int i = 0; i < tamanho - 1; i++) {
+        for (int j = 0; j < tamanho - i - 1; j++) {
+            if (v[j] > v[j + 1]) {
+                // Troca os elementos
+                int temp = v[j];
+                v[j] = v[j + 1];
+                v[j + 1] = temp;
+            }
+        }
+    }
+}
+
+int main() {
+    int vetor[] = {7, 2, 8, 1, 5};
+    int tamanho = 5;
+
+    printf("Vetor antes da ordenação: ");
+    for (int i = 0; i < tamanho; i++) {
+        printf("%d ", vetor[i]);
+    }
+    printf("\n");
+
+    ordenar(vetor, tamanho);
+
+    printf("Vetor depois da ordenação: ");
+    for (int i = 0; i < tamanho; i++) {
+        printf("%d ", vetor[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
+
+
+--14. Função mediaMaiorQue
+Essa função imprime os elementos maiores que a média do vetor.
+
+#include <stdio.h>
+
+void mediaMaiorQue(float v[], int tamanho, float media) {
+    for (int i = 0; i < tamanho; i++) {
+        if (v[i] > media) {
+            printf("%.2f ", v[i]); // Imprime o elemento se for maior que a média
+        }
+    }
+    printf("\n");
+}
+
+int main() {
+    float vetor[] = {10.5, 20.3, 5.5, 8.2};
+    int tamanho = 4;
+    float media = 12.0;
+
+    printf("Elementos maiores que a média: ");
+    mediaMaiorQue(vetor, tamanho, media);
+    return 0;
+}
+
+
+--15. Programa com Menu de Opções
+Esse programa tem um menu interativo com várias opções.
+
+#include <stdio.h>
+
+void inserirValores(int v[], int *tamanho) {
+    printf("Digite a quantidade de elementos: ");
+    scanf("%d", tamanho);
+    for (int i = 0; i < *tamanho; i++) {
+        printf("Digite o valor %d: ", i + 1);
+        scanf("%d", &v[i]);
+    }
+}
+
+void mostrarVetor(int v[], int tamanho) {
+    printf("Vetor: ");
+    for (int i = 0; i < tamanho; i++) {
+        printf("%d ", v[i]);
+    }
+    printf("\n");
+}
+
+int somarElementos(int v[], int tamanho) {
+    int soma = 0;
+    for (int i = 0; i < tamanho; i++) {
+        soma += v[i];
+    }
+    return soma;
+}
+
+float calcularMedia(int v[], int tamanho) {
+    int soma = somarElementos(v, tamanho);
+    return (float)soma / tamanho;
+}
+
+int main() {
+    int vetor[100];
+    int tamanho = 0;
+    int opcao;
+
+    do {
+        printf("Menu:\n");
+        printf("1 - Inserir valores no vetor\n");
+        printf("2 - Mostrar vetor\n");
+        printf("3 - Somar elementos\n");
+        printf("4 - Calcular média\n");
+        printf("5 - Sair\n");
+        printf("Escolha uma opção: ");
+        scanf("%d", &opcao);
+
+        switch (opcao) {
+            case 1:
+                inserirValores(vetor, &tamanho);
+                break;
+            case 2:
+                mostrarVetor(vetor, tamanho);
+                break;
+            case 3:
+                printf("Soma dos elementos: %d\n", somarElementos(vetor, tamanho));
+                break;
+            case 4:
+                printf("Média: %.2f\n", calcularMedia(vetor, tamanho));
+                break;
+            case 5:
+                printf("Saindo...\n");
+                break;
+            default:
+                printf("Opção inválida!\n");
+        }
+    } while (opcao != 5);
+
+    return 0;
+}

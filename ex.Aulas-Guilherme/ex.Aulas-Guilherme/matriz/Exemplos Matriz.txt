@@ -1,0 +1,331 @@
+Exemplo de matrizes
+
+
+--1
+
+
+#include <stdio.h>    // Biblioteca para entrada e saída padrão
+#include <ctype.h>    // Biblioteca para manipulação de caracteres (toupper)
+
+int main() {
+    // Vetor com nomes dos 3 alunos
+    char alunos[3][20] = {"Ana", "Carlos", "Beatriz"};
+    
+    // Vetor com os 5 dias da semana
+    char dias[5][10] = {"Seg", "Ter", "Qua", "Qui", "Sex"};
+    
+    // Matriz para armazenar as presenças: 3 linhas (alunos) x 5 colunas (dias)
+    char presenca[3][5];
+    
+    // Leitura das presenças
+    //
+    for (int i = 0; i < 3; i++) {
+        // i representa o índice do aluno (linha)
+        printf("\nPresenças para %s:\n", alunos[i]);
+        
+        for (int j = 0; j < 5; j++) {
+            // j representa o índice do dia (coluna)
+            char valor;
+            
+            do {
+                printf("%s - Digite 'P' para Presente ou 'F' para Falta: ", dias[j]);
+                scanf(" %c", &valor);      // Lê o caractere com espaço antes do %c para evitar problemas com o buffer
+                
+                valor = toupper(valor);    // Converte o caractere para maiúsculo (ex: 'p' -> 'P')
+                
+                if (valor == 'P' || valor == 'F') {
+                    presenca[i][j] = valor; // Armazena o valor válido na matriz
+                } else {
+                    printf("Entrada inválida! Use apenas P ou F.\n");
+                }
+            } while (valor != 'P' && valor != 'F'); // Repete até que a entrada seja válida
+        }
+    }
+    
+    // Exibição da tabela de presenças
+    //
+    printf("\n\nTabela de Presenças:\n\n");
+    
+    // Cabeçalho da tabela: imprime os dias
+    printf("Aluno     | ");
+    for (int j = 0; j < 5; j++) {
+        printf("%s ", dias[j]);
+    }
+    printf("\n");
+    
+    // Corpo da tabela: mostra cada linha com nome + presenças
+    for (int i = 0; i < 3; i++) {
+        printf("%-10s| ", alunos[i]); // Imprime nome do aluno alinhado à esquerda
+        for (int j = 0; j < 5; j++) {
+            printf("%c ", presenca[i][j]); // Imprime cada presença ('P' ou 'F')
+        }
+        printf("\n");
+    }
+    
+    return 0; // Fim do programa
+}
+
+
+--2
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    // Criamos uma matriz de strings [5][3], onde:
+    // - 5 são os dias da semana (linhas)
+    // - 3 são os horários/aulas por dia (colunas)
+    char grade[5][3][30]; // 30 é o tamanho máximo de cada disciplina
+    
+    // Lista com os nomes dos dias para facilitar a exibição
+    char dias[5][10] = {"Segunda", "Terça", "Quarta", "Quinta", "Sexta"};
+    
+    // ------------------------
+    // Leitura das disciplinas
+    // ------------------------
+    for (int i = 0; i < 5; i++) { // i representa o dia da semana (linha)
+        printf("\nDia: %s\n", dias[i]);
+        
+        for (int j = 0; j < 3; j++) { // j representa a aula (coluna)
+            printf("Digite a disciplina da aula %d: ", j + 1);
+            scanf(" %[^\n]", grade[i][j]); // Lê uma string com espaços
+        }
+    }
+    
+    // ------------------------
+    // Exibição da grade
+    // ------------------------
+    printf("\nGrade de Horários:\n");
+    
+    for (int i = 0; i < 5; i++) {
+        printf("\n%s:\n", dias[i]);
+        
+        for (int j = 0; j < 3; j++) {
+            printf(" Aula %d: %s\n", j + 1, grade[i][j]);
+        }
+    }
+    
+    return 0;
+}
+
+
+
+--3
+
+#include <stdio.h>
+
+int main() {
+    // Criamos uma matriz 3x3 do tipo float
+    // Cada linha representa um aluno
+    // Cada coluna representa uma matéria
+    float notas[3][3];
+    
+    // ------------------------
+    // Leitura dos dados (notas)
+    // ------------------------
+    for (int i = 0; i < 3; i++) {
+        // i representa o número do aluno (linha da matriz)
+        printf("\nAluno %d:\n", i + 1);
+        
+        for (int j = 0; j < 3; j++) {
+            // j representa a matéria (coluna da matriz)
+            printf("Digite a nota da matéria %d: ", j + 1);
+            scanf("%f", &notas[i][j]); // Armazena na posição [i][j]
+        }
+    }
+    
+    // ------------------------
+    // Exibindo o boletim (a matriz)
+    // ------------------------
+    printf("\nBoletim completo:\n");
+    for (int i = 0; i < 3; i++) {
+        printf("Aluno %d: ", i + 1);
+        
+        for (int j = 0; j < 3; j++) {
+            printf("%.1f ", notas[i][j]);
+        }
+        
+        printf("\n"); // quebra de linha ao final de cada aluno
+    }
+    
+    // ------------------------
+    // Calculando e exibindo a média por aluno
+    // ------------------------
+    printf("\nMédia de cada aluno:\n");
+    for (int i = 0; i < 3; i++) {
+        float soma = 0;
+        
+        for (int j = 0; j < 3; j++) {
+            soma += notas[i][j]; // Soma todas as notas do aluno i
+        }
+        
+        float media = soma / 3.0;
+        printf("Aluno %d: %.2f\n", i + 1, media);
+    }
+    
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+---4
+#include <stdio.h>
+#include <stdlib.h> // Necessário para malloc() e free()
+
+int main() {
+    int linhas, colunas;
+    
+    // Solicita ao usuário o tamanho da matriz
+    printf("Digite o número de linhas: ");
+    scanf("%d", &linhas);
+    
+    printf("Digite o número de colunas: ");
+    scanf("%d", &colunas);
+    
+    // ------------------------
+    // ALOCAÇÃO DINÂMICA DA MATRIZ
+    // ------------------------
+    
+    // Passo 1: criar um vetor de ponteiros, cada um representando uma linha
+    int **matriz = (int **) malloc(linhas * sizeof(int *));
+    // Explicação:
+    // - 'int **matriz' é um ponteiro para ponteiro (matriz)
+    // - malloc(linhas * sizeof(int *)) aloca espaço para 'linhas' ponteiros
+    // - Cada ponteiro representará uma linha da matriz
+    
+    // Passo 2: Para cada linha, alocamos um vetor de 'colunas' inteiros
+    for (int i = 0; i < linhas; i++) {
+        matriz[i] = (int *) malloc(colunas * sizeof(int));
+        // Aqui estamos alocando espaço para 'colunas' inteiros em cada linha
+    }
+    
+    // ------------------------
+    // PREENCHIMENTO DA MATRIZ
+    // ------------------------
+    printf("\nDigite os elementos da matriz:\n");
+    for (int i = 0; i < linhas; i++) {
+        for (int j = 0; j < colunas; j++) {
+            printf("Elemento [%d][%d]: ", i, j);
+            scanf("%d", &matriz[i][j]);
+            // Acessamos normalmente como matriz[i][j]
+        }
+    }
+    
+    // ------------------------
+    // EXIBIÇÃO DA MATRIZ
+    // ------------------------
+    printf("\nMatriz digitada:\n");
+    for (int i = 0; i < linhas; i++) {
+        for (int j = 0; j < colunas; j++) {
+            printf("%d\t", matriz[i][j]); // \t para tabular os números
+        }
+        printf("\n");
+    }
+    
+    // ------------------------
+    // LIBERAÇÃO DA MEMÓRIA
+    // ------------------------
+    // Sempre que usamos malloc, precisamos liberar a memória com free()
+    for (int i = 0; i < linhas; i++) {
+        free(matriz[i]); // Libera cada linha
+    }
+    free(matriz); // Libera o vetor de ponteiros
+    
+    return 0;
+}
+
+
+
+
+------5
+#include <stdio.h>
+
+int main() {
+    int linhas, colunas;
+    
+    // usuário define o tamanho da matriz
+    printf("Digite o número de linhas: ");
+    scanf("%d", &linhas);
+    printf("Digite o número de colunas: ");
+    scanf("%d", &colunas);
+    
+    // Declarando uma matriz com tamanho variável (VLA - válido em C99+)
+    int matriz[linhas][colunas];
+    
+    // Preenchendo a matriz
+    for (int i = 0; i < linhas; i++) {
+        for (int j = 0; j < colunas; j++) {
+            printf("Digite o valor para [%d][%d]: ", i, j);
+            scanf("%d", &matriz[i][j]);
+        }
+    }
+    
+    // Exibindo a matriz
+    printf("\nMatriz digitada:\n");
+    for (int i = 0; i < linhas; i++) {
+        for (int j = 0; j < colunas; j++) {
+            printf("%d\t", matriz[i][j]);
+        }
+        printf("\n");
+    }
+    
+    return 0;
+}
+
+--6
+
+#include <stdio.h>
+
+int main() {
+    int matriz[2][2]; // Declara uma matriz 2x2 do tipo inteiro
+    int soma = 0;
+    
+    // Leitura da matriz
+    for (int i = 0; i < 2; i++) {         // Loop para percorrer as linhas
+        for (int j = 0; j < 2; j++) {     // Loop para percorrer as colunas
+            printf("Digite o valor para [%d][%d]: ", i, j);
+            scanf("%d", &matriz[i][j]);   // Lê o valor e armazena na posição correspondente
+            soma += matriz[i][j];         // Acumula a soma dos elementos
+        }
+    }
+    
+    // Exibe a soma
+    printf("Soma de todos os elementos: %d\n", soma);
+    
+    return 0;
+}
+
+
+
+--7
+#include <stdio.h>
+
+int main() {
+    int matriz[2][2]; // Declara uma matriz 2x2 do tipo inteiro
+
+    // Preenchendo a matriz com valores informados pelo usuário
+    for (int i = 0; i < 2; i++) {    // Loop para percorrer as linhas
+        for (int j = 0; j < 2; j++) {    // Loop para percorrer as colunas
+            printf("Digite o valor para [%d][%d]: ", i, j);
+            scanf("%d", &matriz[i][j]);    // Lê o valor e armazena na posição correspondente
+        }
+    }
+
+    // Exibindo a matriz
+    printf("\nMatriz digitada:\n");
+    for (int i = 0; i < 2; i++) {    // Loop para percorrer as linhas novamente
+        for (int j = 0; j < 2; j++) {    // Loop para colunas
+            printf("%d\t", matriz[i][j]);    // Imprime o valor da posição i,j
+        }
+        printf("\n");    // Quebra de linha após cada linha da matriz
+    }
+
+    return 0;
+}

@@ -1,0 +1,289 @@
+(-Matrizes-)
+
+como se declara: int matriz [3][4]; --tres linhas e 4 colunas
+--------------exercicios-----------------------
+
+1.
+Crie uma matriz 2x2. Peça ao usuário para digitar os 4 valores da matriz. Ao final, exiba a matriz linha por linha.
+
+int main()
+{   
+    // Preenchendo a matriz
+    int matriz [2][2];
+    int i,j;
+    printf("Digite 4 valores\n");
+    for (i= 0; i < 2; i++){
+        for (j=0; j <2; j++) {
+            scanf("%d", &matriz[i][j]);
+        }
+    }
+    // Exibindo a matriz
+     printf("Matriz digitada:\n");
+    for (i = 0; i < 2; i++) {
+        for (j = 0; j < 2; j++) {
+            printf("%d ", matriz[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+
+
+
+2.
+Crie uma matriz 3x3 com valores digitados pelo usuário. Em seguida, calcule e exiba:
+-
+A soma de todos os elementos
+-
+A média dos elementos
+-
+Os valores da diagonal principal
+
+
+
+#include <stdio.h> 
+
+int main() {
+    // Declara uma matriz 3x3 para armazenar os valores e uma variável para a soma dos elementos
+    int matriz[3][3], soma = 0;
+    
+    // Solicita ao usuário que insira os valores da matriz
+    printf("Digite os 9 valores da matriz 3x3:\n");
+    for (int i = 0; i < 3; i++) { // Loop para percorrer as linhas da matriz
+        for (int j = 0; j < 3; j++) { // Loop para percorrer as colunas da matriz
+            scanf("%d", &matriz[i][j]); // Lê o valor digitado pelo usuário e armazena na matriz
+            soma += matriz[i][j]; // Acumula o valor lido na variável soma
+        }
+    }
+    
+    // Calcula a média dos elementos da matriz
+    double media = soma / 9.0; // Divide a soma total pelo número de elementos (9)
+    
+    // Exibe a soma de todos os elementos da matriz
+    printf("Soma dos elementos: %d\n", soma);
+    
+    // Exibe a média dos elementos da matriz
+    printf("Media dos elementos: %.2f\n", media); // Mostra a média com duas casas decimais
+    
+    // Exibe os valores da diagonal principal da matriz
+    printf("Valores da diagonal principal: ");
+    for (int i = 0; i < 3; i++) { // Percorre os elementos da diagonal principal
+        printf("%d ", matriz[i][i]); // Exibe o elemento localizado na posição [i][i]
+    }
+    printf("\n"); // Pula para a próxima linha para melhor formatação da saída
+    
+    return 0; // Retorna 0 indicando que o programa finalizou corretamente
+}
+
+
+
+
+
+3.
+Crie uma matriz onde o usuário irá digitar a presença (P) ou falta (F) de 4 alunos durante 5 dias da semana.
+Ao final, exiba uma tabela formatada com os dados digitados.
+
+
+
+#include <stdio.h>
+
+int main() {
+    // Declara uma matriz 4x5 para armazenar a presença ('P') ou falta ('F') de 4 alunos durante 5 dias
+    char matriz[4][5];
+    
+    // Solicita ao usuário que insira os valores da matriz
+    printf("Digite 'P' para presença e 'F' para falta dos 4 alunos durante 5 dias:\n");
+    for (int i = 0; i < 4; i++) { // Loop para percorrer os alunos (linhas)
+        for (int j = 0; j < 5; j++) { // Loop para percorrer os dias (colunas)
+            printf("Aluno %d, Dia %d: ", i + 1, j + 1);
+            scanf(" %c", &matriz[i][j]); // Lê a presença ou falta do aluno no dia correspondente
+        }
+    }
+    
+    // Exibe a tabela formatada com os dados digitados
+    printf("\nTabela de Presença:\n");
+    printf("--------------------------------\n");
+    printf("      | D1 | D2 | D3 | D4 | D5 |\n");
+    printf("--------------------------------\n");
+    for (int i = 0; i < 4; i++) { // Percorre os alunos
+        printf("Aluno %d |", i + 1);
+        for (int j = 0; j < 5; j++) { // Percorre os dias
+            printf("  %c |", matriz[i][j]); // Exibe os valores armazenados
+        }
+        printf("\n--------------------------------\n");
+    }
+    
+    return 0; // Retorna 0 indicando que o programa finalizou corretamente
+}
+
+
+
+
+
+4.
+Simule um jogo da velha. Crie uma matriz 3x3 e permita que dois jogadores joguem alternadamente, escolhendo a linha e a coluna onde querem marcar (X ou O).
+Não permita sobrescrever posições já ocupadas e exiba o tabuleiro a cada jogada.
+Exercício Avançado 3
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#define TAM 3 // Define o tamanho do tabuleiro como 3x3
+
+// Função para exibir o tabuleiro do jogo
+void exibirTabuleiro(char tabuleiro[TAM][TAM]) {
+    printf("\n  0 1 2\n"); // Cabeçalho das colunas
+    for (int i = 0; i < TAM; i++) {
+        printf("%d ", i); // Exibe o índice da linha
+        for (int j = 0; j < TAM; j++) {
+            printf("%c ", tabuleiro[i][j]); // Exibe o conteúdo da célula
+        }
+        printf("\n");
+    }
+}
+
+// Função para verificar se há um vencedor
+char verificarVencedor(char tabuleiro[TAM][TAM]) {
+    for (int i = 0; i < TAM; i++) {
+        // Verifica se há vitória em alguma linha
+        if (tabuleiro[i][0] == tabuleiro[i][1] && tabuleiro[i][1] == tabuleiro[i][2] && tabuleiro[i][0] != ' ')
+            return tabuleiro[i][0];
+        // Verifica se há vitória em alguma coluna
+        if (tabuleiro[0][i] == tabuleiro[1][i] && tabuleiro[1][i] == tabuleiro[2][i] && tabuleiro[0][i] != ' ')
+            return tabuleiro[0][i];
+    }
+    // Verifica se há vitória na diagonal principal
+    if (tabuleiro[0][0] == tabuleiro[1][1] && tabuleiro[1][1] == tabuleiro[2][2] && tabuleiro[0][0] != ' ')
+        return tabuleiro[0][0];
+    // Verifica se há vitória na diagonal secundária
+    if (tabuleiro[0][2] == tabuleiro[1][1] && tabuleiro[1][1] == tabuleiro[2][0] && tabuleiro[0][2] != ' ')
+        return tabuleiro[0][2];
+    
+    return ' '; // Retorna espaço vazio se não houver vencedor
+}
+
+int main() {
+    char tabuleiro[TAM][TAM]; // Matriz para representar o tabuleiro
+    int linha, coluna; // Variáveis para armazenar a posição da jogada
+    char jogadorAtual = 'X'; // Define o jogador inicial
+    int jogadas = 0; // Contador de jogadas
+
+    // Inicializa o tabuleiro com espaços em branco
+    for (int i = 0; i < TAM; i++) {
+        for (int j = 0; j < TAM; j++) {
+            tabuleiro[i][j] = ' ';
+        }
+    }
+
+    while (1) { // Loop principal do jogo
+        // Exibe o tabuleiro atualizado
+        exibirTabuleiro(tabuleiro);
+
+        // Solicita ao jogador que insira sua jogada
+        printf("Jogador %c, informe linha e coluna: ", jogadorAtual);
+        scanf("%d %d", &linha, &coluna);
+
+        // Verifica se a jogada é válida
+        if (linha < 0 || linha >= TAM || coluna < 0 || coluna >= TAM || tabuleiro[linha][coluna] != ' ') {
+            printf("Jogada inválida! Tente novamente.\n");
+            continue; // Volta para solicitar uma nova jogada
+        }
+
+        // Registra a jogada no tabuleiro
+        tabuleiro[linha][coluna] = jogadorAtual;
+        jogadas++;
+
+        // Verifica se há um vencedor
+        char vencedor = verificarVencedor(tabuleiro);
+        if (vencedor != ' ') {
+            exibirTabuleiro(tabuleiro);
+            printf("Parabéns! O jogador %c venceu!\n", vencedor);
+            break; // Sai do loop e finaliza o jogo
+        }
+
+        // Verifica se houve empate (todas as casas preenchidas)
+        if (jogadas == 9) {
+            exibirTabuleiro(tabuleiro);
+            printf("Empate! O jogo terminou sem vencedores.\n");
+            break; // Sai do loop e finaliza o jogo
+        }
+
+        // Alterna o jogador para a próxima rodada
+        jogadorAtual = (jogadorAtual == 'X') ? 'O' : 'X';
+    }
+
+    return 0; // Retorna 0 para indicar que o programa finalizou corretamente
+}
+
+
+
+
+5.
+
+Crie uma matriz de 3 alunos e 3 matérias (matriz 3x3) onde o usuário digita as notas. Depois, exiba a média de cada aluno e a média de cada matéria (coluna).
+
+
+#include <stdio.h>
+
+#define ALUNOS 3
+#define MATERIAS 3
+
+// Função para exibir a matriz de notas
+void exibirNotas(float matriz[ALUNOS][MATERIAS]) {
+    printf("Notas dos alunos:\n");
+    for (int i = 0; i < ALUNOS; i++) {
+        printf("Aluno %d: ", i + 1);
+        for (int j = 0; j < MATERIAS; j++) {
+            printf("%.2f ", matriz[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+// Função para calcular a média de cada aluno
+void mediaAlunos(float matriz[ALUNOS][MATERIAS]) {
+    for (int i = 0; i < ALUNOS; i++) {
+        float soma = 0;
+        for (int j = 0; j < MATERIAS; j++) {
+            soma += matriz[i][j]; // Soma as notas do aluno
+        }
+        printf("Média do Aluno %d: %.2f\n", i + 1, soma / MATERIAS); // Calcula e exibe a média do aluno
+    }
+}
+
+// Função para calcular a média de cada matéria
+void mediaMaterias(float matriz[ALUNOS][MATERIAS]) {
+    for (int j = 0; j < MATERIAS; j++) {
+        float soma = 0;
+        for (int i = 0; i < ALUNOS; i++) {
+            soma += matriz[i][j]; // Soma as notas da matéria
+        }
+        printf("Média da Matéria %d: %.2f\n", j + 1, soma / ALUNOS); // Calcula e exibe a média da matéria
+    }
+}
+
+int main() {
+    float notas[ALUNOS][MATERIAS]; // Matriz para armazenar as notas dos alunos
+
+    // Solicita as notas para cada aluno e cada matéria
+    for (int i = 0; i < ALUNOS; i++) {
+        for (int j = 0; j < MATERIAS; j++) {
+            printf("Digite a nota do Aluno %d na Matéria %d: ", i + 1, j + 1);
+            scanf("%f", &notas[i][j]); // Lê a nota do aluno na matéria
+        }
+    }
+
+    // Exibe as notas dos alunos
+    exibirNotas(notas);
+
+    // Exibe a média de cada aluno
+    mediaAlunos(notas);
+
+    // Exibe a média de cada matéria
+    mediaMaterias(notas);
+
+    return 0; // Retorna 0 indicando que o programa finalizou corretamente
+}
