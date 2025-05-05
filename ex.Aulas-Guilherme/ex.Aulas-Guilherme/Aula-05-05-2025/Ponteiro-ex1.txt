@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <string.h>
+
+// Definição do struct Pessoa
+struct Pessoa {
+    char nome[100];   // Armazena o nome (até 99 caracteres + '\0')
+    int idade;        // Armazena a idade como inteiro
+    float altura;     // Armazena a altura como float
+};
+
+// Função que recebe uma cópia da struct (passagem por valor)
+void atualizaridade(struct Pessoa p) {
+    p.idade += 1;    // Incrementa apenas a cópia local, não afeta o original
+}
+
+int main() {
+    struct Pessoa pessoa;  // Corrigido: removido o ponto após Pessoa
+    
+    strcpy(pessoa.nome, "Ana Paula");  // Corrigido: strcp! para strcpy
+    pessoa.idade = 25;
+    pessoa.altura = 1.65;
+    
+    printf("Antes (por valor): %d anos\n", pessoa.idade);  // Mostra 25
+    atualizaridade(pessoa);  // Passa por valor (cópia da struct)
+    printf("Depois (por valor): %d anos\n", pessoa.idade);  // Continua 25
+    
+    return 0;
+}
+Resumo:
+
+Este código ilustra a passagem de estruturas por valor em C. Foi definida uma estrutura Pessoa contendo nome, idade e altura. A função atualizaridade() recebe uma cópia da estrutura (não o original) e incrementa sua idade, mas esta alteração não afeta a variável original na função main(). O programa demonstra que quando estruturas são passadas por valor (cópia), as modificações dentro da função permanecem locais. Foram corrigidos erros de sintaxe como o uso incorreto de strcp! (correto é strcpy) e a declaração da variável pessoa. O resultado mostra que a idade permanece 25 mesmo após chamar a função, comprovando que apenas a cópia foi modificada.
+

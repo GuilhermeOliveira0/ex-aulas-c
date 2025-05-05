@@ -1,0 +1,38 @@
+#include <stdio.h>    // Biblioteca padrão de entrada/saída (printf)
+#include <stdlib.h>   // Biblioteca para alocação dinâmica (malloc, free)
+
+// Definindo a estrutura ponto com coordenadas x e y
+struct ponto {
+    float x;    // Coordenada horizontal
+    float y;    // Coordenada vertical
+};
+
+// Criando um alias 'Ponto' para 'struct ponto'
+typedef struct ponto Ponto;
+
+int main() {
+    // Alocação dinâmica de memória para uma estrutura Ponto
+    Ponto *p = (Ponto*) malloc(sizeof(Ponto));
+    
+    // Verificação se a alocação foi bem-sucedida
+    if (p == NULL) {
+        printf("Erro na alocação de memória!\n");
+        return 1;  // Encerra o programa com código de erro
+    }
+    
+    // Atribuição de valores às coordenadas
+    p->x = 1.0f;   // Atribui 1.0 à coordenada x
+    p->y = 5.0f;   // Atribui 5.0 à coordenada y
+    
+    // Exibição das coordenadas formatadas
+    printf("Ponto = (%.2f, %.2f)\n", p->x, p->y);
+    
+    // Liberação da memória alocada
+    free(p);
+    p = NULL;  // Boa prática: evitar ponteiro dangling
+    
+    return 0;  // Programa encerrado com sucesso
+}
+Resumo:
+
+Este código demonstra a alocação dinâmica de memória para estruturas em C. Ele cria um tipo Ponto com coordenadas x e y, aloca memória dinamicamente usando malloc, atribui valores (1.0, 5.0) às coordenadas, exibe o ponto formatado com duas casas decimais e finalmente libera a memória com free. Foram adicionadas boas práticas como verificação de alocação bem-sucedida e anulação do ponteiro após liberação. O programa ilustra o ciclo completo de uso de memória dinâmica: alocação, utilização e liberação, essencial para evitar vazamentos de memória em programas C.

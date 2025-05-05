@@ -1,0 +1,27 @@
+POR QUE USAMOS PONTEIROS? 
+1. Acesso direto à memória 
+Ponteiros permitem ler e alterar valores direto na memória, sem precisar copiar. 
+Exemplo: se você passar um ponteiro para uma função, ela pode alterar a variável original (por referência).
+
+
+#include <stdio.h> // Biblioteca padrão para entrada e saída
+
+// Função que dobra o valor de uma variável
+void dobrar(int *num) {  // Recebe um ponteiro para inteiro
+    *num = *num * 2;     // Acessa o valor apontado e o dobra
+}
+
+int main() {
+    int valor = 10; // Declara uma variável inteira e atribui o valor 10
+    
+    printf("Antes da função: %d\n", valor); // Exibe o valor original (10)
+    
+    dobrar(&valor); // Passa o endereço da variável para a função
+    
+    printf("Depois da função: %d\n", valor); // Exibe o valor modificado (20)
+    
+    return 0; // Fim do programa
+}
+Resumo:
+
+Este código demonstra o uso de ponteiros em C para modificar variáveis através de funções. O programa define uma função dobrar() que recebe um ponteiro para inteiro e multiplica por 2 o valor armazenado no endereço apontado. Na função principal, é criada uma variável valor inicializada com 10. O programa mostra o valor antes e depois de chamar a função dobrar(), passando o endereço da variável. A função modifica diretamente o valor na memória através do ponteiro, resultando na mudança permanente da variável original. Antes da função, o valor é 10; depois, torna-se 20, ilustrando como ponteiros permitem alterar variáveis diretamente em seu local de memória.

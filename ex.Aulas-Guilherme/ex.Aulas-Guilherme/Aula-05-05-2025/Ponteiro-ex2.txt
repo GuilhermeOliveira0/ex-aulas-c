@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <string.h>
+
+// Definição do struct Pessoa
+struct Pessoa {
+    char nome[100];    // Campo para nome (corrigido de 'none' para 'nome')
+    int idade;         // Campo para idade
+    float altura;      // Campo para altura
+};
+
+// Função que recebe um ponteiro para struct Pessoa
+void atualizarIdade(struct Pessoa *p) {  // Corrigido: aspas por asterisco
+    p->idade += 1;    // Acessa diretamente o campo idade e incrementa
+}
+
+int main() {
+    struct Pessoa pessoa;  // Corrigido: removido ponto após Pessoa
+    
+    strcpy(pessoa.nome, "Ana Paula");  // Corrigido: return para strcpy
+    pessoa.idade = 25;     // Corrigido: Pessoa.idade para pessoa.idade
+    pessoa.altura = 1.65;  // Corrigido: Pessoa.altura para pessoa.altura
+    
+    printf("Antes (por ponteiro): %d anos\n", pessoa.idade);  // Mostra 25
+    atualizarIdade(&pessoa);  // Corrigido: @ por & (passa endereço)
+    printf("Depois (por ponteiro): %d anos\n", pessoa.idade);  // Mostra 26
+    
+    return 0;
+}
+Resumo:
+
+Este código demonstra a passagem de estruturas por referência (usando ponteiros) em C. A estrutura Pessoa armazena nome, idade e altura. A função atualizarIdade() recebe um ponteiro para a estrutura e incrementa diretamente o campo idade na memória original. Foram corrigidos vários erros de sintaxe: nome do campo (de 'none' para 'nome'), operador de ponteiro (de aspas para asterisco), operador de endereço (de @ para &), e chamadas incorretas a membros da struct. O programa mostra como a passagem por ponteiro permite modificar a estrutura original - a idade muda de 25 para 26, comprovando que a alteração foi feita diretamente na variável original.

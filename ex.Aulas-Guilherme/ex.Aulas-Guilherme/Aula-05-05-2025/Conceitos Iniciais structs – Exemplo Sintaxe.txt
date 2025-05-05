@@ -1,0 +1,28 @@
+#include <stdio.h>  // Inclui a biblioteca padrão de entrada e saída (para funções como printf e scanf)
+
+// Definição da estrutura 'pessoa'
+struct pessoa {
+    int idade;    // Armazena a idade como um número inteiro
+    float altura; // Armazena a altura como um número de ponto flutuante
+};
+
+// Cria um apelido 'Pessoa' para 'struct pessoa' (para simplificar a declaração)
+typedef struct pessoa Pessoa;
+
+int main() {
+    // Declara uma variável 'p' do tipo Pessoa (que é a estrutura pessoa)
+    Pessoa p;
+
+    // Atribui valores aos campos da estrutura
+    p.idade = 5;      // Define a idade como 5 anos
+    p.altura = 1.65;  // Define a altura como 1.65 metros
+
+    // Imprime os valores armazenados
+    printf("A idade da pessoa é: %d", p.idade);     // Mostra a idade
+    printf("\nA altura da pessoa é: %.2f", p.altura); // Mostra a altura com 2 casas decimais
+
+    return 0;  // Encerra o programa com sucesso
+}
+
+
+Oq faz: O código em C define uma estrutura chamada "pessoa" para armazenar informações como idade (número inteiro) e altura (número decimal). Utilizando um apelido "Pessoa" para simplificar a declaração, o programa cria uma variável desse tipo, atribui a ela os valores 5 (idade) e 1.65 (altura) e, em seguida, exibe esses dados na tela com formatação adequada. O objetivo é demonstrar o uso básico de estruturas em C para agrupar e manipular dados relacionados.
