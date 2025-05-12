@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Definindo a estrutura do nó da lista
+struct No {
+    int valor;          // Valor armazenado no nó
+    struct No *prox;    // Ponteiro para o próximo nó
+};
+
+// Função para criar um novo nó
+struct No* criarNo(int valor) {
+    struct No* novoNo = (struct No*)malloc(sizeof(struct No));
+    if (novoNo == NULL) {
+        printf("Erro ao alocar memória!\n");
+        exit(1);
+    }
+    novoNo->valor = valor;
+    novoNo->prox = NULL;
+    return novoNo;
+}
+
+// Função para inserir um novo nó no início da lista
+struct No* inserirNoInicio(struct No *head, int valor) {
+    struct No *novoNo = criarNo(valor); // Cria o novo nó
+    novoNo->prox = head;                // O próximo do novo nó aponta para o antigo início
+    return novoNo;                      // Retorna o novo nó como novo início
+}
+
+// Função para imprimir a lista encadeada
+void imprimirLista(struct No *head) {
+    struct No *atual = head;            // Ponteiro auxiliar para percorrer a lista
+    
+    printf("Lista: ");
+    while (atual != NULL) {             // Enquanto não chegar no final (NULL)
+        printf("%d -> ", atual->valor); // Imprime o valor do nó atual
+        atual = atual->prox;            // Avança para o próximo nó
+    }
+    printf("NULL\n");                   // Indica o fim da lista
+}
+
+// Função para liberar a memória alocada para a lista
+void liberarLista(struct No *head) {
+    struct No *atual = head;
+    struct No *proximo;
+    
+    while (atual != NULL) {
+        proximo = atual->prox;  // Guarda referência para o próximo nó
+        free(atual);            // Libera o nó atual
+        atual = proximo;        // Avança para o próximo
+    }
+}
+
+int main() {
+    struct No *lista = NULL;    // Inicializa a lista vazia
+
+    // Construindo a lista: [10] -> [20] -> [30] -> NULL
+    lista = inserirNoInicio(lista, 30);
+    lista = inserirNoInicio(lista, 20);
+    lista = inserirNoInicio(lista, 10);
+
+    printf("Lista após inserir 30, 20, 10:\n");
+    imprimirLista(lista);
+
+    // Inserindo mais um valor no início
+    lista = inserirNoInicio(lista, 5);
+    printf("\nLista após inserir 5 no início:\n");
+    imprimirLista(lista);
+
+    // Libera a memória alocada para a lista
+    liberarLista(lista);
+
+    return 0;
+}
