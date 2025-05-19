@@ -1,0 +1,109 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Estrutura de um nó da fila
+struct No {
+    int valor;          // Valor armazenado no nó
+    struct No *prox;    // Ponteiro para o próximo nó
+};
+
+// Função para enfileirar (inserir no final da fila)
+// Parâmetros:
+// - inicio: ponteiro para o ponteiro do início da fila
+// - fim: ponteiro para o ponteiro do fim da fila
+// - valor: valor inteiro a ser inserido
+void enqueue(struct No **inicio, struct No **fim, int valor) {
+    // Aloca memória para o novo nó
+    struct No *novo = (struct No*)malloc(sizeof(struct No));
+    novo->valor = valor;    // Atribui o valor ao novo nó
+    novo->prox = NULL;      // Novo nó será o último, então prox = NULL
+
+    // Verifica se a fila está vazia
+    if (*fim == NULL) {
+        // Fila vazia: novo nó será tanto o início quanto o fim
+        *inicio = novo;
+        *fim = novo;
+    } else {
+        // Fila não vazia: conecta o último nó ao novo nó
+        (*fim)->prox = novo;
+        // Atualiza o ponteiro do fim para apontar para o novo nó
+        *fim = novo;
+    }
+}
+
+// Função para desenfileirar (remover do início da fila)
+// Parâmetros:
+// - inicio: ponteiro para o ponteiro do início da fila
+// - fim: ponteiro para o ponteiro do fim da fila
+// Retorno:
+// - Valor removido ou -1 se a fila estiver vazia
+int dequeue(struct No **inicio, struct No **fim) {
+    // Verifica se a fila está vazia
+    if (*inicio == NULL) {
+        printf("Fila vazia\n");
+        return -1;
+    }
+
+    // Guarda o nó a ser removido e seu valor
+    struct No *temp = *inicio;
+    int valor = temp->valor;
+
+    // Avança o ponteiro do início para o próximo nó
+    *inicio = temp->prox;
+
+    // Se a fila ficou vazia após a remoção
+    if (*inicio == NULL) {
+        *fim = NULL;  // Atualiza o ponteiro do fim também
+    }
+
+    free(temp);    // Libera a memória do nó removido
+    return valor;  // Retorna o valor removido
+}
+// Função para consultar o primeiro elemento sem remover
+// Parâmetro:
+// - inicio: ponteiro para o início da fila
+// Retorno:
+// - Valor no início da fila ou -1 se vazia
+
+int peek(struct No *inicio) {
+    if (inicio == NULL) {
+        printf("Fila vazia\n");
+        return -1;
+    }
+    return inicio->valor;  // Retorna o valor sem modificar a fila
+}
+
+// Função para imprimir a fila do início ao fim
+// Parâmetro:
+// - inicio: ponteiro para o início da fila
+void imprimirFila(struct No *inicio) {
+    printf("Inicio da fila\n");
+    // Percorre todos os nós da fila
+    while (inicio != NULL) {
+        printf(" %d\n", inicio->valor);
+        inicio = inicio->prox;
+    }
+    printf("NULL (fim)\n");
+}
+
+// Função principal (exemplo de uso)
+int main() {
+    struct No *inicio = NULL;  // Ponteiro para o início da fila
+    struct No *fim = NULL;     // Ponteiro para o fim da fila
+
+    // Teste das operações da fila
+    enqueue(&inicio, &fim, 10);  // Enfileira 10
+    enqueue(&inicio, &fim, 20);  // Enfileira 20
+    enqueue(&inicio, &fim, 30);  // Enfileira 30
+
+    imprimirFila(inicio);  // Mostra a fila: 10 -> 20 -> 30 -> NULL
+
+    printf("Primeiro elemento (peek): %d\n", peek(inicio));  // Deve mostrar 10
+
+    int removido = dequeue(&inicio, &fim);  // Remove 10
+    printf("Elemento removido: %d\n", removido);
+
+    imprimirFila(inicio);  // Mostra a fila após remoção: 20 -> 30 -> NULL
+
+    return 0;
+}

@@ -1,0 +1,79 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Estrutura de um nó da lista encadeada
+struct No {
+    int valor;          // Valor armazenado no nó
+    struct No *prox;    // Ponteiro para o próximo nó
+};
+
+// Função para remover um nó com valor específico da lista
+// Parâmetros:
+// - head: ponteiro para o primeiro nó da lista
+// - valorRemover: valor inteiro a ser removido da lista
+// Retorno:
+// - Ponteiro para o novo início da lista (pode ser o mesmo ou diferente)
+struct No* removerElemento(struct No *head, int valorRemover) {
+    // 1. Verifica se a lista está vazia
+    if (head == NULL) {
+        printf("Lista vazia.\n");
+        return NULL;    // Retorna NULL pois não há o que remover
+    }
+
+    // 2. Caso especial: remoção do primeiro nó
+    if (head->valor == valorRemover) {
+        struct No *temp = head;    // Guarda referência ao nó a ser removido
+        head = head->prox;         // Atualiza o head para apontar para o próximo nó
+        free(temp);                // Libera a memória do nó removido
+        return head;               // Retorna o novo início da lista
+    }
+
+    // 3. Percorre a lista para encontrar o valor
+    struct No *anterior = head;    // Ponteiro para o nó anterior
+    struct No *atual = head->prox; // Ponteiro para o nó atual (começa do segundo nó)
+    
+    // Avança enquanto não chegar ao final E não encontrar o valor
+    while (atual != NULL && atual->valor != valorRemover) {
+        anterior = atual;         // Atualiza o anterior
+        atual = atual->prox;      // Avança para o próximo nó
+    }
+
+    // 4. Verifica se o valor não foi encontrado
+    if (atual == NULL) {
+        printf("Valor %d não encontrado na lista.\n", valorRemover);
+        return head;    // Retorna a lista original sem modificações
+    }
+
+    // 5. Remove o nó encontrado (não é o primeiro)
+    anterior->prox = atual->prox; // Faz o anterior pular o nó a ser removido
+    free(atual);                 // Libera a memória do nó removido
+    return head;                 // Retorna o head original (não mudou)
+}
+
+/* 
+Exemplo de uso:
+
+int main() {
+    // Criação de uma lista de exemplo: 1 -> 2 -> 3 -> NULL
+    struct No *head = malloc(sizeof(struct No));
+    head->valor = 1;
+    head->prox = malloc(sizeof(struct No));
+    head->prox->valor = 2;
+    head->prox->prox = malloc(sizeof(struct No));
+    head->prox->prox->valor = 3;
+    head->prox->prox->prox = NULL;
+
+    // Remove o valor 2
+    head = removerElemento(head, 2);
+
+    // Remove o valor 1 (agora o primeiro nó)
+    head = removerElemento(head, 1);
+
+    // Tenta remover valor que não existe
+    head = removerElemento(head, 5);
+
+    // Libera memória restante (implementação não mostrada)
+    // ...
+    return 0;
+}
+*/

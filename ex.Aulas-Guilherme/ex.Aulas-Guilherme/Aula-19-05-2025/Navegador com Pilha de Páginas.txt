@@ -1,0 +1,138 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// Structure to represent a web page in history
+struct Pagina {
+    char url[100];          // Stores the page URL (max 99 chars + null terminator)
+    struct Pagina *prox;    // Pointer to the previous page in history
+};
+
+/**
+ * Adds a new page to the top of the stack
+ * @param topo Pointer to the top pointer of the stack
+ * @param endereco URL string to be added
+ */
+void acessarPagina(struct Pagina **topo, const char *endereco) {
+    // Allocate memory for new page
+    struct Pagina *nova = (struct Pagina *)malloc(sizeof(struct Pagina));
+    if (nova == NULL) {
+        printf("Erro: Falha ao alocar memória.\n");
+        return;
+    }
+    
+    // Copy URL safely
+    strncpy(nova->url, endereco, 99);
+    nova->url[99] = '\0';  // Ensure null-termination
+    
+    // Link new page to the stack
+    nova->prox = *topo;
+    *topo = nova;
+    
+    printf("Acessando: %s\n", nova->url);
+}
+
+/**
+ * Removes the top page from the stack (back button functionality)
+ * @param topo Pointer to the top pointer of the stack
+ */
+void voltarPagina(struct Pagina **topo) {
+    if (*topo == NULL) {
+        printf("Nenhuma página para voltar.\n");
+        return;
+    }
+    
+    struct Pagina *temp = *topo;  // Store current top page
+    printf("Voltando da página: %s\n", temp->url);
+    
+    *topo = temp->prox;  // Update top to previous page
+    free(temp);          // Free memory of removed page
+}
+
+/**
+ * Displays the current page (top of stack)
+ * @param topo Pointer to the top of the stack
+ */
+void mostrarPaginaAtual(struct Pagina *topo) {
+    if (topo == NULL) {
+        printf("Nenhuma página aberta.\n");
+    } else {
+        printf("Página atual: %s\n", topo->url);
+    }
+}
+
+/**
+ * Displays full navigation history
+ * @param topo Pointer to the top of the stack
+ */
+void mostrarHistorico(struct Pagina *topo) {
+    if (topo == NULL) {
+        printf("Histórico vazio.\n");
+        return;
+    }
+    
+    printf("Histórico de navegação (mais recente primeiro):\n");
+    while (topo != NULL) {
+        printf("→ %s\n", topo->url);
+        topo = topo->prox;
+    }
+}
+
+/**
+ * Main function with interactive menu
+ */
+int main() {
+    struct Pagina *pilha = NULL;  // Navigation stack
+    int opcao;
+    char url[100];
+    
+    do {
+        // Display menu
+        printf("\n=== MENU DO NAVEGADOR ===\n");
+        printf("1. Acessar nova página\n");
+        printf("2. Voltar página anterior\n");
+        printf("3. Ver página atual\n");
+        printf("4. Mostrar histórico\n");
+        printf("0. Sair\n");
+        printf("Escolha uma opção: ");
+        
+        // Get user input
+        scanf("%d", &opcao);
+        getchar();  // Clear newline from input buffer
+        
+        switch (opcao) {
+            case 1:  // Add new page
+                printf("Digite a URL da nova página: ");
+                fgets(url, sizeof(url), stdin);
+                url[strcspn(url, "\n")] = '\0';  // Remove trailing newline
+                acessarPagina(&pilha, url);
+                break;
+                
+            case 2:  // Go back
+                voltarPagina(&pilha);
+                break;
+                
+            case 3:  // Show current page
+                mostrarPaginaAtual(pilha);
+                break;
+                
+            case 4:  // Show full history
+                mostrarHistorico(pilha);
+                break;
+                
+            case 0:  // Exit
+                printf("Saindo do navegador...\n");
+                break;
+                
+            default:
+                printf("Opção inválida. Tente novamente.\n");
+        }
+    } while (opcao != 0);
+    
+    // Clean up remaining memory
+    while (pilha != NULL) {
+        voltarPagina(&pilha);
+    }
+    
+    return 0;
+}

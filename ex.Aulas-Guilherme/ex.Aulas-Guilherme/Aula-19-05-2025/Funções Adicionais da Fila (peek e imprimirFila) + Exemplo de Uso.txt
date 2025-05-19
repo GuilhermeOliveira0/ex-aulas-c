@@ -1,0 +1,47 @@
+// Função para consultar o primeiro elemento sem remover
+// Parâmetro:
+// - inicio: ponteiro para o início da fila
+// Retorno:
+// - Valor no início da fila ou -1 se vazia
+int peek(struct No *inicio) {
+    if (inicio == NULL) {
+        printf("Fila vazia\n");
+        return -1;
+    }
+    return inicio->valor;  // Retorna o valor sem modificar a fila
+}
+
+// Função para imprimir a fila do início ao fim
+// Parâmetro:
+// - inicio: ponteiro para o início da fila
+void imprimirFila(struct No *inicio) {
+    printf("Inicio da fila\n");
+    // Percorre todos os nós da fila
+    while (inicio != NULL) {
+        printf(" %d\n", inicio->valor);
+        inicio = inicio->prox;
+    }
+    printf("NULL (fim)\n");
+}
+
+// Função principal (exemplo de uso)
+int main() {
+    struct No *inicio = NULL;  // Ponteiro para o início da fila
+    struct No *fim = NULL;     // Ponteiro para o fim da fila
+
+    // Teste das operações da fila
+    enqueue(&inicio, &fim, 10);  // Enfileira 10
+    enqueue(&inicio, &fim, 20);  // Enfileira 20
+    enqueue(&inicio, &fim, 30);  // Enfileira 30
+
+    imprimirFila(inicio);  // Mostra a fila: 10 -> 20 -> 30 -> NULL
+
+    printf("Primeiro elemento (peek): %d\n", peek(inicio));  // Deve mostrar 10
+
+    int removido = dequeue(&inicio, &fim);  // Remove 10
+    printf("Elemento removido: %d\n", removido);
+
+    imprimirFila(inicio);  // Mostra a fila após remoção: 20 -> 30 -> NULL
+
+    return 0;
+}

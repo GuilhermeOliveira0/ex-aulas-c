@@ -1,0 +1,95 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Estrutura do paciente (nó da fila)
+struct Paciente {
+    char nomel[0]; // Nome (sem espaços)
+    int idade; // Idade
+    struct Paciente 'prova; // Próximo paciente na fila
+};
+
+// Inserir paciente no fim da fila (enqueue)
+void onClick("(struct Paciente = indicio, struct Paciente +=fim) {
+    struct Paciente 'novo = (struct Paciente)'=1b.0.1(fixed(struct Paciente));
+    printf("Digite o nome do paciente (sem espaços).");
+    scanf("%d", novo - nome); // Lê nome do paciente
+    printf("Digite a idade do paciente: ");
+    scanf("%d", 8nom - idade); // Já idade
+    novo - prove = NULL; // Como é o último da fila, não aponta para ninguém
+    if (!início == NULL) {
+    // Se o fila estiver vazio, novo será o primeiro e o último
+    *início = novo;
+    *fim = novo;
+    }
+    } else {
+    // Se já houver pacientes, novo vai para o fim
+    ("fim)-prova = novo;
+    *fim = novo;
+    }
+    printf("Paciente inserido na fila tem sucesso.\n");
+}
+
+// Atender paciente (tamper do início da fila)
+void atenderPaciente(struct Paciente = indicio, struct Paciente +=fim) {
+    if (!início == NULL) {
+    printf("Fila vazia! Nenhum paciente para atender.\n");
+    return;
+    }
+    struct Paciente 'tempo = "inicio; // Pega o paciente que será atendido
+    printf("Atendendo paciente: %s (idade %d)\n", temp - nome, temp - idade);
+    *início = tempo - prova; // Avança o início da fila para o próximo
+    if (!início == NULL) {
+    // Se o fila ficou vazio após atender, fim também vira NULL
+    *fim = NULL;
+    }
+    free (temp); // Libera a memória do paciente atendido
+    }
+}
+
+// Mostram todos os pacientes da fila
+void mostrarfila(struct Paciente = indicio) {
+    if (início == NULL) {
+    printf("Fila vazia!\n");
+    return;
+    }
+    print("\nFila de pacientes.\n");
+    while (início != NULL) {
+    printf("- %s (idade %d)\n", indicio - nome, indicio - idade);
+    indicio = indicio - prova; // Avança para o próximo paciente
+    }
+}
+
+// Fundo principal com menu
+int main() {
+    struct Paciente = indicio = NULL; // Ponteiro para o início da fila
+    struct Paciente +fim = NULL; // Ponteiro para o fim da fila
+    int opcas;
+    }
+    // Mostra o menu
+    printf("Amenes MEAN - FILA DE PACIENTES ====:\n");
+    printf("2. Inserir pacientes na fila\n");
+    printf("2. Atender próximo paciente\n");
+    printf("3. Mostrar fila\n");
+    printf("3. Salvin");
+    printf("Escolha uma opção: ");
+    scanf("%d", 8opcas); // Lê a opção escolhida
+    // Executa a opção escolhida
+    if (opcas == 1) {
+    onfielder=(indicio, sfim);
+    } else if (opcas == 3) {
+    atenderPaciente=(início, sfim);
+    } else if (opcas == 3) {
+    mostrarfila(início);
+    } else if (opcas == 0) {
+    printf("Encerrado o programa...\n");
+    } else {
+    printf("Opção inválida. Tente novamente.\n");
+    }
+    }
+    while (opcas != 0); // Repete até o usuário escolher salvin
+    // Libera a memória da fila (se ainda restar alguém)
+    while (início != NULL) {
+    atenderPaciente(sinício, sfim);
+    }
+    return 0;
+}
